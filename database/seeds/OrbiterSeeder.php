@@ -14,7 +14,6 @@ class OrbiterSeeder extends Seeder
     {
         DB::table('orbiter')->insert([
             [
-                'id' => 1,
                 'cmode' =>'x-band' ,
                 'type' => 'dfbd',
                 'band' => 'vsv',
@@ -22,8 +21,21 @@ class OrbiterSeeder extends Seeder
                 'isMalFunctioning' => 0
             ],
             [
-                'id' => 2,
+                'cmode' =>'UHF' ,
+                'type' => 'dfbd',
+                'band' => 'vsv',
+                'planet' => 'Mars',
+                'isMalFunctioning' => 1
+            ],
+            [
                 'cmode' =>'x-band' ,
+                'type' => 'dfbd',
+                'band' => 'vsv',
+                'planet' => 'Mars',
+                'isMalFunctioning' => 0
+            ],
+            [
+                'cmode' =>'UHF' ,
                 'type' => 'dfbd',
                 'band' => 'vsv',
                 'planet' => 'Mars',

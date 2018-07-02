@@ -14,15 +14,21 @@ class SpaceCraftSeeder extends Seeder
     {
         DB::table('spacecraft')->insert([
             [
-                'id' => 1,
                 'name' =>'Mars 2' ,
                 'country' => 'China'
             ],
             [
-                'id' => 2,
-                'name' =>'Sojourner' ,
+                'name' =>'Mars Pathfinder' ,
                 'country' => 'USA'
             ],
+            [
+                'name' =>'Mars 3' ,
+                'country' => 'China'
+            ],
+            [
+                'name' =>'Beagle 2' ,
+                'country' => 'Russia'
+            ]
         ]);
     }
 }

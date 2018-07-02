@@ -42,9 +42,9 @@ CREATE trigger BI_MISSION
 CREATE TABLE Objectives (
   id NUMBER(4),
   mission_id NUMBER(4),
-  name VARCHAR2(50),
+  name VARCHAR2(100),
   type VARCHAR2(50),
-  description VARCHAR2(50),
+  description VARCHAR2(100),
   constraint OBJECTIVES_PK PRIMARY KEY (id)
 )
 /
@@ -60,7 +60,7 @@ CREATE trigger BI_OBJECTIVES
 
 CREATE TABLE PowerSource (
   id NUMBER(4),
-  rower_id NUMBER(4),
+  rover_id NUMBER(4),
   name VARCHAR2(50),
   constraint POWERSOURCE_PK PRIMARY KEY (id)
 )
@@ -77,7 +77,7 @@ CREATE trigger BI_POWERSOURCE
 
 CREATE TABLE Computer (
   id NUMBER(4),
-  rower_id NUMBER(4),
+  rover_id NUMBER(4),
   eeprom VARCHAR2(50),
   dram VARCHAR2(50),
   flash VARCHAR2(50),
@@ -405,20 +405,20 @@ CREATE trigger BI_MOSSBAUER
 /
 
 CREATE TABLE MiniTES (
-id NUMBER(4),
+  id NUMBER(4),
   sensor_id NUMBER(4),
   nav_id NUMBER(4),
-constraint MINI_TES_PK PRIMARY KEY (id)
+  constraint MINI_TES_PK PRIMARY KEY (id)
 )
 /
 CREATE sequence MINI_TES_SEQ
 /
 CREATE trigger BI_MINI_TES
   before insert on MiniTES
-for each row
-begin
-  select MINI_TES_SEQ.nextval into :NEW.id from dual;
-end;
+  for each row
+  begin
+    select MINI_TES_SEQ.nextval into :NEW.id from dual;
+  end;
 /
 
 CREATE TABLE APXS (
@@ -542,9 +542,9 @@ ALTER TABLE Mission ADD CONSTRAINT Mission_fk0 FOREIGN KEY (spacecraft_id) REFER
 ALTER TABLE Objectives ADD CONSTRAINT Objectives_fk0 FOREIGN KEY (mission_id) REFERENCES Mission(id) ON DELETE CASCADE;
 
 
-ALTER TABLE PowerSource ADD CONSTRAINT PowerSource_fk0 FOREIGN KEY (rower_id) REFERENCES Rover(id) ON DELETE CASCADE;
+ALTER TABLE PowerSource ADD CONSTRAINT PowerSource_fk0 FOREIGN KEY (rover_id) REFERENCES Rover(id) ON DELETE CASCADE;
 
-ALTER TABLE Computer ADD CONSTRAINT Computer_fk0 FOREIGN KEY (rower_id) REFERENCES Rover(id) ON DELETE CASCADE;
+ALTER TABLE Computer ADD CONSTRAINT Computer_fk0 FOREIGN KEY (rover_id) REFERENCES Rover(id) ON DELETE CASCADE;
 
 ALTER TABLE Coordinates ADD CONSTRAINT Coordinates_fk0 FOREIGN KEY (computer_id) REFERENCES Computer(id) ON DELETE CASCADE;
 

@@ -291,8 +291,6 @@ CREATE trigger BI_PANCAM
 CREATE TABLE Mast (
   id NUMBER(4),
   camera_id NUMBER(4),
-  name VARCHAR2(50),
-  sub_camera VARCHAR2(50),
   constraint MAST_PK PRIMARY KEY (id)
 )
 /
@@ -341,7 +339,6 @@ CREATE trigger BI_CHEMCAM
 CREATE TABLE Mardi (
   id NUMBER(4),
   camera_id NUMBER(4),
-  name VARCHAR2(50),
   constraint MARDI_PK PRIMARY KEY (id)
 )
 /
@@ -518,6 +515,26 @@ CREATE trigger BI_ORBITER
 /
 
 
+CREATE TABLE MastSubCamera (
+  id NUMBER(4),
+  mastcam_id NUMBER(4),
+  name VARCHAR2(50),
+  yield VARCHAR2(50),
+  scale VARCHAR2(50),
+  constraint MASTSUBCAMERA_PK PRIMARY KEY (id)
+)
+/
+CREATE sequence MASTSUBCAMERA_SEQ
+/
+CREATE trigger BI_MATSUBCAMERA
+  before insert on MastSubCamera
+  for each row
+  begin
+    select MASTSUBCAMERA_SEQ.nextval into :NEW.id from dual;
+  end;
+/
+
+
 ALTER TABLE Rover ADD CONSTRAINT Rover_fk0 FOREIGN KEY (mission_id) REFERENCES Mission(id) ON DELETE CASCADE;
 
 ALTER TABLE Mission ADD CONSTRAINT Mission_fk0 FOREIGN KEY (spacecraft_id) REFERENCES SpaceCraft(id) ON DELETE CASCADE;
@@ -575,3 +592,5 @@ ALTER TABLE SubSensor ADD CONSTRAINT SubSensors_fk0 FOREIGN KEY (apxs_id) REFERE
 
 ALTER TABLE Communication ADD CONSTRAINT Communication_fk0 FOREIGN KEY (rover_id) REFERENCES Rover(id) ON DELETE CASCADE;
 ALTER TABLE Communication ADD CONSTRAINT Communication_fk1 FOREIGN KEY (orbiter_id) REFERENCES Orbiter(id) ON DELETE CASCADE;
+
+ALTER TABLE MastSubCamera ADD CONSTRAINT MastSubCamera_fk0 FOREIGN KEY (mastcam_id) REFERENCES Mast(id) ON DELETE CASCADE;

@@ -4,20 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Objective extends Model
+class Spacecraft extends Model
 {
-    protected $table = 'objective';
+    protected $table = 'spacecraft';
 
     /**
-     * Get the mission of the objective
+     * Get all the missions for a spacecraft
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function mission()
+    public function missions()
     {
         return $this->belongsTo(Mission::class);
     }
-
-
-
 }

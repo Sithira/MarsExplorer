@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PowerSource extends Model
+class Sensor extends Model
 {
-    protected $table = 'powersource';
+    protected $table = 'sensor';
 
     /**
-     * Get the rover that has the power source.
+     * Get the rover that has the sensor attached on
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

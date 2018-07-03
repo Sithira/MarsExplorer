@@ -15,23 +15,31 @@ class SensorSeeder extends Seeder
         DB::table('sensor')->insert([
             [
                 'rover_id' => 1,
-                'name' => ' Mini-TES',
-                'type' => 'Infrared spectrometer'
+                'parent_id' => 1,
+                'camera_id' => 1,
+                'sensor_type_id' => 1,
+                'name' => 'Mini-TES'
             ],
             [
                 'rover_id' => 2,
-                'name' => 'Mössbauer',
-                'type' => 'spectrometer'
+                'parent_id' => 1,
+                'camera_id' => 2,
+                'sensor_type_id' => 2,
+                'name' => 'Mössbauer'
             ],
             [
                 'rover_id' => 3,
-                'name' => 'APXS',
-                'type' => 'X-Ray spectrometer'
+                'parent_id' => 1,
+                'camera_id' => 3,
+                'sensor_type_id' => 3,
+                'name' => 'APXS'
             ],
             [
                 'rover_id' => 4,
-                'name' => 'SAM',
-                'type' => 'spectrometer'
+                'parent_id' => 1,
+                'camera_id' => 4,
+                'sensor_type_id' => 4,
+                'name' => 'SAM'
             ]
         ]);
     }

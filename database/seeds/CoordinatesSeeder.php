@@ -15,18 +15,22 @@ class CoordinatesSeeder extends Seeder
         DB::table('coordinates')->insert([
             [
                 'computer_id' => 1,
+                'image_id' => 1,
                 'data' => '48.218830° N, 234.250778° E'
             ],
             [
                 'computer_id' => 2,
+                'image_id' => 2,
                 'data' => '34.218830°N, 154.250778°E'
             ],
             [
                 'computer_id' => 3,
+                'image_id' => 3,
                 'data' => '61.218830° N, 134.250778° E'
             ],
             [
                 'computer_id' => 4,
+                'image_id' => 4,
                 'data' => '58.218830° N, 244.250778° E'
             ]
         ]);

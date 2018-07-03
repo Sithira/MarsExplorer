@@ -16,6 +16,7 @@ class CameraSeeder extends Seeder
             [
                 'id' => 1,
                 'rover_id' => 1,
+                'camera_type_id' => 1,
                 'isMainCam' => 0,
                 'name' => 'HazCam',
                 'focal_length' => '23mm',
@@ -25,8 +26,9 @@ class CameraSeeder extends Seeder
             [
                 'id' => 1,
                 'rover_id' => 2,
-                'isMainCam' => 0,
+                'camera_type_id' => 1,
                 'name' => 'HazCam',
+                'isMainCam' => 0,
                 'focal_length' => '32mm',
                 'field_of_view' => '60°',
                 'resolution' => '1600 x 1200'
@@ -34,6 +36,7 @@ class CameraSeeder extends Seeder
             [
                 'id' => 2,
                 'rover_id' => 1 ,
+                'camera_type_id' => 2,
                 'isMainCam' => 1,
                 'name' => 'NavCam',
                 'focal_length' => '50mm',
@@ -43,6 +46,7 @@ class CameraSeeder extends Seeder
             [
                 'id' => 3,
                 'rover_id' => 4 ,
+                'camera_type_id' => 2,
                 'isMainCam' => 1,
                 'name' => 'NavCam',
                 'focal_length' => '50mm',
@@ -52,6 +56,7 @@ class CameraSeeder extends Seeder
             [
                 'id' => 4,
                 'rover_id' => 3,
+                'camera_type_id' => 2,
                 'isMainCam' => 1,
                 'name' => 'NavCam',
                 'focal_length' => '34mm',
@@ -61,6 +66,7 @@ class CameraSeeder extends Seeder
             [
                 'id' => 5,
                 'rover_id' => 3,
+                'camera_type_id' => 3,
                 'isMainCam' => 0,
                 'name' => 'MastCam 1',
                 'focal_length' => '34mm',
@@ -70,6 +76,7 @@ class CameraSeeder extends Seeder
             [
                 'id' => 6,
                 'rover_id' => 4 ,
+                'camera_type_id' => 3,
                 'isMainCam' => 0,
                 'name' => 'MastCam 2',
                 'focal_length' => '100mm',
@@ -79,6 +86,7 @@ class CameraSeeder extends Seeder
             [
                 'id' => 7,
                 'rover_id' => 4 ,
+                'camera_type_id' => 4,
                 'isMainCam' => 0,
                 'name' => 'MAHLI',
                 'focal_length' => '21.3mm',
@@ -88,6 +96,7 @@ class CameraSeeder extends Seeder
             [
                 'id' => 8,
                 'rover_id' => 4 ,
+                'camera_type_id' => 4,
                 'isMainCam' => 0,
                 'name' => 'MARDI',
                 'focal_length' => '28mm',
@@ -97,6 +106,7 @@ class CameraSeeder extends Seeder
             [
                 'id' => 9,
                 'rover_id' => 3,
+                'camera_type_id' => 5,
                 'isMainCam' => 1,
                 'name' => 'MARDI',
                 'focal_length' => '30mm',
@@ -106,6 +116,7 @@ class CameraSeeder extends Seeder
             [
                 'id' => 10,
                 'rover_id' => 4,
+                'camera_type_id' => 6,
                 'isMainCam' => 0,
                 'name' => 'ChemCam',
                 'focal_length' => '25mm',
@@ -115,6 +126,7 @@ class CameraSeeder extends Seeder
             [
                 'id' => 11,
                 'rover_id' => 1,
+                'camera_type_id' => 6,
                 'isMainCam' => 0,
                 'name' => 'ChemCam',
                 'focal_length' => '25mm',
@@ -124,6 +136,7 @@ class CameraSeeder extends Seeder
             [
                 'id' => 12,
                 'rover_id' => 1,
+                'camera_type_id' => 7,
                 'isMainCam' => 0,
                 'name' => 'PanCam',
                 'focal_length' => '38mm',

@@ -4,6 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\Objective
+ *
+ * @property-read \App\Models\Mission $mission
+ * @mixin \Eloquent
+ */
 class Objective extends Model
 {
     protected $table = 'objective';

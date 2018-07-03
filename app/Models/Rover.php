@@ -4,6 +4,31 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\Rover
+ *
+ * @property int $ID
+ * @property int|null $MISSION_ID
+ * @property string|null $NAME
+ * @property string|null $WIDTH
+ * @property string|null $HEIGHT
+ * @property string|null $LENGTH
+ * @property int|null $WHEEL_COUNT
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Camera[] $cameras
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Communication[] $communications
+ * @property-read \App\Models\Computer $computer
+ * @property-read \App\Models\Mission $mission
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\PowerSource[] $power_sources
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Sensor[] $sensors
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Rover whereHEIGHT($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Rover whereID($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Rover whereLENGTH($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Rover whereMISSIONID($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Rover whereNAME($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Rover whereWHEELCOUNT($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Rover whereWIDTH($value)
+ * @mixin \Eloquent
+ */
 class Rover extends Model
 {
     protected $table = 'rover';
@@ -21,11 +46,11 @@ class Rover extends Model
     /**
      * Get all the missions for the rover
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function missions()
+    public function mission() // Todo: Check this
     {
-        return $this->hasMany(Mission::class);
+        return $this->belongsTo(Mission::class);
     }
 
     /**

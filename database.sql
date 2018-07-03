@@ -1,12 +1,15 @@
+-- Rover Table --
 CREATE TABLE Rover (
   id NUMBER(4),
   mission_id NUMBER(4),
   name VARCHAR2(50),
+  state VARCHAR2(10),
   width VARCHAR2(50),
   height VARCHAR2(50),
   length VARCHAR2(50),
   wheel_count NUMBER(4),
-  constraint ROVER_PK PRIMARY KEY (id)
+  constraint ROVER_PK PRIMARY KEY (id),
+  constraint STATE_CHECK CHECK(state IN ('READY','DEPLOYING','DEPLOYED','LANDED'))
 )
 /
 CREATE sequence ROVER_SEQ
@@ -20,6 +23,7 @@ CREATE trigger BI_ROVER
 /
 
 
+-- Mission Table --
 CREATE TABLE Mission (
   id NUMBER(4),
   spacecraft_id NUMBER(4),
@@ -39,6 +43,8 @@ CREATE trigger BI_MISSION
   end;
 /
 
+
+-- Objectives Table --
 CREATE TABLE Objectives (
   id NUMBER(4),
   mission_id NUMBER(4),
@@ -58,6 +64,8 @@ CREATE trigger BI_OBJECTIVES
   end;
 /
 
+
+-- PowerSource Table --
 CREATE TABLE PowerSource (
   id NUMBER(4),
   rover_id NUMBER(4),
@@ -75,6 +83,8 @@ CREATE trigger BI_POWERSOURCE
   end;
 /
 
+
+-- Computer Table --
 CREATE TABLE Computer (
   id NUMBER(4),
   rover_id NUMBER(4),
@@ -94,9 +104,12 @@ CREATE trigger BI_COMPUTER
   end;
 /
 
+
+-- Coordinate Table --
 CREATE TABLE Coordinates (
   id NUMBER(4),
   computer_id NUMBER(4),
+  image_id NUMBER(4) NULL,
   data VARCHAR2(50),
   constraint COORDINATES_PK PRIMARY KEY (id)
 )
@@ -111,10 +124,13 @@ CREATE trigger BI_COORDINATES
   end;
 /
 
+
+-- Images Table --
 CREATE TABLE Images (
   id NUMBER(4),
   camera_id NUMBER(4),
   storage_id NUMBER(4),
+  data CLOB,
   significance FLOAT,
   resolution VARCHAR2(50),
   constraint IMAGES_PK PRIMARY KEY (id)
@@ -131,6 +147,7 @@ CREATE trigger BI_IMAGES
 /
 
 
+-- Copy Table --
 CREATE TABLE Copy (
   id NUMBER(4),
   computer_id NUMBER(4),
@@ -148,6 +165,8 @@ CREATE trigger BI_COPY
   end;
 /
 
+
+-- Radiation Table --
 CREATE TABLE Radiation (
   id NUMBER(4),
   coordinate_id NUMBER(4),
@@ -166,6 +185,8 @@ CREATE trigger BI_RADIATION
   end;
 /
 
+
+-- Surface Radiation Table --
 CREATE TABLE Surface (
   id NUMBER(4),
   radiation_id NUMBER(4),
@@ -183,6 +204,8 @@ CREATE trigger BI_SURFACE
   end;
 /
 
+
+-- Interior Radiation Table --
 CREATE TABLE Interior (
   id NUMBER(4),
   radiation_id NUMBER(4),
@@ -200,6 +223,8 @@ CREATE trigger BI_INTERIOR
   end;
 /
 
+
+-- Storage Table --
 CREATE TABLE Storage (
   id NUMBER(4),
   type VARCHAR2(50),
@@ -217,9 +242,12 @@ CREATE trigger BI_STORAGE
   end;
 /
 
+
+-- Camera Table --
 CREATE TABLE Camera (
   id NUMBER(4),
   rover_id NUMBER(4),
+  camera_type_id NUMBER(4),
   isMainCam SMALLINT,
   name VARCHAR2(50),
   focal_length VARCHAR2(50),
@@ -238,123 +266,50 @@ CREATE trigger BI_CAMERA
   end;
 /
 
-CREATE TABLE Haz (
+
+-- CameraType Table --
+CREATE TABLE CameraType (
+  id NUMBER(4),
+  type VARCHAR2(50),
+  constraint CAMERATYPE_PK PRIMARY KEY (id)
+)
+/
+CREATE sequence CAMERATYPE_SEQ
+/
+CREATE trigger BI_CAMERATYPE
+  before insert on CameraType
+  for each row
+  begin
+    select CAMERATYPE_SEQ.nextval into :NEW.id from dual;
+  end;
+/
+
+
+-- MastSub Camera --
+CREATE TABLE MastSubCamera (
   id NUMBER(4),
   camera_id NUMBER(4),
   name VARCHAR2(50),
-  constraint HAZ_PK PRIMARY KEY (id)
+  yield VARCHAR2(50),
+  scale VARCHAR2(50),
+  constraint MASTSUBCAMERA_PK PRIMARY KEY (id)
 )
 /
-CREATE sequence HAZ_SEQ
+CREATE sequence MASTSUBCAMERA_SEQ
 /
-CREATE trigger BI_HAZ
-  before insert on Haz
+CREATE trigger BI_MATSUBCAMERA
+  before insert on MastSubCamera
   for each row
   begin
-    select HAZ_SEQ.nextval into :NEW.id from dual;
+    select MASTSUBCAMERA_SEQ.nextval into :NEW.id from dual;
   end;
 /
 
-CREATE TABLE Nav (
-  id NUMBER(4),
-  camera_id NUMBER(4),
-  name VARCHAR2(50),
-  constraint NAV_PK PRIMARY KEY (id)
-)
-/
-CREATE sequence NAV_SEQ
-/
-CREATE trigger BI_NAV
-  before insert on Nav
-  for each row
-  begin
-    select NAV_SEQ.nextval into :NEW.id from dual;
-  end;
-/
 
-CREATE TABLE Pancam (
-  id NUMBER(4),
-  camera_id NUMBER(4),
-  constraint PANCAM_PK PRIMARY KEY (id)
-)
-/
-CREATE sequence PANCAM_SEQ
-/
-CREATE trigger BI_PANCAM
-  before insert on Pancam
-  for each row
-  begin
-    select PANCAM_SEQ.nextval into :NEW.id from dual;
-  end;
-/
-
-CREATE TABLE Mast (
-  id NUMBER(4),
-  camera_id NUMBER(4),
-  constraint MAST_PK PRIMARY KEY (id)
-)
-/
-CREATE sequence MAST_SEQ
-/
-CREATE trigger BI_MAST
-  before insert on Mast
-  for each row
-  begin
-    select MAST_SEQ.nextval into :NEW.id from dual;
-  end;
-/
-
-CREATE TABLE Mahli (
-  id NUMBER(4),
-  camera_id NUMBER(4),
-  constraint MAHLI_PK PRIMARY KEY (id)
-)
-/
-CREATE sequence MAHLI_SEQ
-/
-CREATE trigger BI_MAHLI
-  before insert on Mahli
-  for each row
-  begin
-    select MAHLI_SEQ.nextval into :NEW.id from dual;
-  end;
-/
-
-CREATE TABLE ChemCam (
-  id NUMBER(4),
-  camera_id NUMBER(4),
-  constraint CHEMCAM_PK PRIMARY KEY (id)
-)
-/
-CREATE sequence CHEMCAM_SEQ
-/
-CREATE trigger BI_CHEMCAM
-  before insert on ChemCam
-  for each row
-  begin
-    select CHEMCAM_SEQ.nextval into :NEW.id from dual;
-  end;
-/
-
-CREATE TABLE Mardi (
-  id NUMBER(4),
-  camera_id NUMBER(4),
-  constraint MARDI_PK PRIMARY KEY (id)
-)
-/
-CREATE sequence MARDI_SEQ
-/
-CREATE trigger BI_MARDI
-  before insert on Mardi
-  for each row
-  begin
-    select MARDI_SEQ.nextval into :NEW.id from dual;
-  end;
-/
-
+-- Instrument Table --
 CREATE TABLE Instrument (
   id NUMBER(4),
-  chemcam_id NUMBER(4),
+  camera_id NUMBER(4),
   name VARCHAR2(50),
   purpose VARCHAR2(50),
   constraint INSTRUMENT_PK PRIMARY KEY (id)
@@ -370,11 +325,15 @@ CREATE trigger BI_INSTRUMENT
   end;
 /
 
+
+-- Sensor Table --
 CREATE TABLE Sensor (
   id NUMBER(4),
   rover_id NUMBER(4),
+  parent_id NUMBER(4),
+  camera_id NUMBER(4) NULL,
+  sensor_type_id NUMBER(4),
   name VARCHAR2(50),
-  type VARCHAR2(50),
   constraint SENSOR_PK PRIMARY KEY (id)
 )
 /
@@ -388,55 +347,26 @@ CREATE trigger BI_SENSOR
   end;
 /
 
-CREATE TABLE Mossbauer (
+
+-- SensorType Table --
+CREATE TABLE SensorType (
   id NUMBER(4),
-  sensor_id NUMBER(4),
-  constraint MOSSBAUER_PK PRIMARY KEY (id)
+  type VARCHAR2(50),
+  constraint SENSORTYPE_PK PRIMARY KEY (id)
 )
 /
-CREATE sequence MOSSBAUER_SEQ
+CREATE sequence SENSORTYPE_SEQ
 /
-CREATE trigger BI_MOSSBAUER
-  before insert on Mossbauer
+CREATE trigger BI_SENSORTYPE
+  before insert on SensorType
   for each row
   begin
-    select MOSSBAUER_SEQ.nextval into :NEW.id from dual;
+    select SENSORTYPE_SEQ.nextval into :NEW.id from dual;
   end;
 /
 
-CREATE TABLE MiniTES (
-  id NUMBER(4),
-  sensor_id NUMBER(4),
-  nav_id NUMBER(4),
-  constraint MINI_TES_PK PRIMARY KEY (id)
-)
-/
-CREATE sequence MINI_TES_SEQ
-/
-CREATE trigger BI_MINI_TES
-  before insert on MiniTES
-  for each row
-  begin
-    select MINI_TES_SEQ.nextval into :NEW.id from dual;
-  end;
-/
 
-CREATE TABLE APXS (
-  id NUMBER(4),
-  sensor_id NUMBER(4),
-  constraint APXS_PK PRIMARY KEY (id)
-)
-/
-CREATE sequence APXS_SEQ
-/
-CREATE trigger BI_APXS
-  before insert on APXS
-  for each row
-  begin
-    select APXS_SEQ.nextval into :NEW.id from dual;
-  end;
-/
-
+-- SpaceCraft Table --
 CREATE TABLE SpaceCraft (
   id NUMBER(4),
   name VARCHAR2(50),
@@ -455,24 +385,7 @@ CREATE trigger BI_SPACECRAFT
 /
 
 
-CREATE TABLE SubSensor (
-  id NUMBER(4),
-  apxs_id NUMBER(4),
-  name VARCHAR2(50),
-  constraint SUBSENSORS_PK PRIMARY KEY (id)
-)
-/
-CREATE sequence SUBSENSOR_SEQ
-/
-CREATE trigger BI_SUBSENSOR
-  before insert on SubSensor
-  for each row
-  begin
-    select SUBSENSOR_SEQ.nextval into :NEW.id from dual;
-  end;
-/
-
-
+-- Communication Table --
 CREATE TABLE Communication (
   id NUMBER(4),
   rover_id NUMBER(4),
@@ -494,6 +407,7 @@ CREATE trigger BI_COMMUNICATION
 /
 
 
+-- Orbiter Table --
 CREATE TABLE Orbiter (
   id NUMBER(4),
   cmode VARCHAR2(50),
@@ -515,25 +429,6 @@ CREATE trigger BI_ORBITER
 /
 
 
-CREATE TABLE MastSubCamera (
-  id NUMBER(4),
-  mastcam_id NUMBER(4),
-  name VARCHAR2(50),
-  yield VARCHAR2(50),
-  scale VARCHAR2(50),
-  constraint MASTSUBCAMERA_PK PRIMARY KEY (id)
-)
-/
-CREATE sequence MASTSUBCAMERA_SEQ
-/
-CREATE trigger BI_MATSUBCAMERA
-  before insert on MastSubCamera
-  for each row
-  begin
-    select MASTSUBCAMERA_SEQ.nextval into :NEW.id from dual;
-  end;
-/
-
 
 ALTER TABLE Rover ADD CONSTRAINT Rover_fk0 FOREIGN KEY (mission_id) REFERENCES Mission(id) ON DELETE CASCADE;
 
@@ -541,12 +436,12 @@ ALTER TABLE Mission ADD CONSTRAINT Mission_fk0 FOREIGN KEY (spacecraft_id) REFER
 
 ALTER TABLE Objectives ADD CONSTRAINT Objectives_fk0 FOREIGN KEY (mission_id) REFERENCES Mission(id) ON DELETE CASCADE;
 
-
 ALTER TABLE PowerSource ADD CONSTRAINT PowerSource_fk0 FOREIGN KEY (rover_id) REFERENCES Rover(id) ON DELETE CASCADE;
 
 ALTER TABLE Computer ADD CONSTRAINT Computer_fk0 FOREIGN KEY (rover_id) REFERENCES Rover(id) ON DELETE CASCADE;
 
 ALTER TABLE Coordinates ADD CONSTRAINT Coordinates_fk0 FOREIGN KEY (computer_id) REFERENCES Computer(id) ON DELETE CASCADE;
+ALTER TABLE Coordinates ADD CONSTRAINT Coordinates_fk1 FOREIGN KEY (image_id) REFERENCES Images(id) ON DELETE CASCADE;
 
 ALTER TABLE Images ADD CONSTRAINT Images_fk0 FOREIGN KEY (camera_id) REFERENCES Camera(id) ON DELETE CASCADE;
 ALTER TABLE Images ADD CONSTRAINT Images_fk1 FOREIGN KEY (storage_id) REFERENCES Storage(id) ON DELETE CASCADE;
@@ -560,37 +455,16 @@ ALTER TABLE Surface ADD CONSTRAINT Surface_fk0 FOREIGN KEY (radiation_id) REFERE
 
 ALTER TABLE Interior ADD CONSTRAINT Interior_fk0 FOREIGN KEY (radiation_id) REFERENCES Radiation(id) ON DELETE CASCADE;
 
-
 ALTER TABLE Camera ADD CONSTRAINT Camera_fk0 FOREIGN KEY (rover_id) REFERENCES Rover(id) ON DELETE CASCADE;
+ALTER TABLE Camera ADD CONSTRAINT Camera_fk1 FOREIGN KEY (camera_type_id) REFERENCES CameraType(id) ON DELETE CASCADE;
 
-ALTER TABLE Haz ADD CONSTRAINT Haz_fk0 FOREIGN KEY (camera_id) REFERENCES Camera(id) ON DELETE CASCADE;
-
-ALTER TABLE Nav ADD CONSTRAINT Nav_fk0 FOREIGN KEY (camera_id) REFERENCES Camera(id) ON DELETE CASCADE;
-
-ALTER TABLE Pancam ADD CONSTRAINT Pancam_fk0 FOREIGN KEY (camera_id) REFERENCES Camera(id) ON DELETE CASCADE;
-
-ALTER TABLE Mast ADD CONSTRAINT Mast_fk0 FOREIGN KEY (camera_id) REFERENCES Camera(id) ON DELETE CASCADE;
-
-ALTER TABLE Mahli ADD CONSTRAINT Mahli_fk0 FOREIGN KEY (camera_id) REFERENCES Camera(id) ON DELETE CASCADE;
-
-ALTER TABLE ChemCam ADD CONSTRAINT ChemCam_fk0 FOREIGN KEY (camera_id) REFERENCES Camera(id) ON DELETE CASCADE;
-
-ALTER TABLE Mardi ADD CONSTRAINT Mardi_fk0 FOREIGN KEY (camera_id) REFERENCES Camera(id) ON DELETE CASCADE;
-
-ALTER TABLE Instrument ADD CONSTRAINT Instrument_fk0 FOREIGN KEY (chemcam_id) REFERENCES ChemCam(id) ON DELETE CASCADE;
+ALTER TABLE MastSubCamera ADD CONSTRAINT MastSubCamera_fk0 FOREIGN KEY (camera_id) REFERENCES Camera(id) ON DELETE CASCADE;
+ALTER TABLE Instrument ADD CONSTRAINT Instrument_fk0 FOREIGN KEY (camera_id) REFERENCES Camera(id) ON DELETE CASCADE;
 
 ALTER TABLE Sensor ADD CONSTRAINT Sensor_fk0 FOREIGN KEY (rover_id) REFERENCES Rover(id) ON DELETE CASCADE;
-
-ALTER TABLE Mossbauer ADD CONSTRAINT Mossbauer_fk0 FOREIGN KEY (sensor_id) REFERENCES Sensor(id) ON DELETE CASCADE;
-
-ALTER TABLE MiniTES ADD CONSTRAINT MiniTES_fk0 FOREIGN KEY (sensor_id) REFERENCES Sensor(id) ON DELETE CASCADE;
-ALTER TABLE MiniTES ADD CONSTRAINT MiniTES_fk1 FOREIGN KEY (nav_id) REFERENCES Nav(id) ON DELETE CASCADE;
-
-ALTER TABLE APXS ADD CONSTRAINT APXS_fk0 FOREIGN KEY (sensor_id) REFERENCES Sensor(id) ON DELETE CASCADE;
-
-ALTER TABLE SubSensor ADD CONSTRAINT SubSensors_fk0 FOREIGN KEY (apxs_id) REFERENCES APXS(id) ON DELETE CASCADE;
+ALTER TABLE Sensor ADD CONSTRAINT Sensor_fk1 FOREIGN KEY (camera_id) REFERENCES Camera(id) ON DELETE CASCADE;
+ALTER TABLE Sensor ADD CONSTRAINT Sensor_fk2 FOREIGN KEY (parent_id) REFERENCES Sensor(id) ON DELETE CASCADE;
+ALTER TABLE Sensor ADD CONSTRAINT Sensor_fk3 FOREIGN KEY (sensor_type_id) REFERENCES SensorType(id) ON DELETE CASCADE;
 
 ALTER TABLE Communication ADD CONSTRAINT Communication_fk0 FOREIGN KEY (rover_id) REFERENCES Rover(id) ON DELETE CASCADE;
 ALTER TABLE Communication ADD CONSTRAINT Communication_fk1 FOREIGN KEY (orbiter_id) REFERENCES Orbiter(id) ON DELETE CASCADE;
-
-ALTER TABLE MastSubCamera ADD CONSTRAINT MastSubCamera_fk0 FOREIGN KEY (mastcam_id) REFERENCES Mast(id) ON DELETE CASCADE;

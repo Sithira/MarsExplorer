@@ -14,19 +14,19 @@ class SubSensorSeeder extends Seeder
     {
         DB::table('subsensor')->insert([
             [
-                'apxs_id' => 1,
+                'subsensor_id' => 1,
                 'name' => 'chemical temperature'
             ],
             [
-                'apxs_id' => 2,
+                'subsensor_id' => 2,
                 'name' => 'optical sensor'
             ],
             [
-                'apxs_id' => 3,
+                'subsensor_id' => 3,
                 'name' => 'chemical temperature'
             ],
             [
-                'apxs_id' => 4,
+                'subsensor_id' => 4,
                 'name' => 'optical sensor'
             ]
         ]);

@@ -1,4 +1,4 @@
---Get the no of Cameras when Rover ID and Camera type is given--
+-- Get the no.of Cameras when Rover ID and Camera type is given --
 CREATE OR REPLACE PROCEDURE NO_OF_CAMERAS(cameraType IN varchar2, rover_id IN varchar2, no OUT number)
 IS
   BEGIN
@@ -10,7 +10,7 @@ IS
   END;
 /
 
--- Dynamically set the main camera of the given rover.
+-- Dynamically set the main camera of the given rover --
 CREATE OR REPLACE PROCEDURE SET_MAIN_CAM_RANDOM(ROVERID IN NUMBER)
 
   -- declare the required variables

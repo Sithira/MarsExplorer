@@ -1,5 +1,5 @@
---Get Total volume of a Rover by passing Rover ID--
-create FUNCTION TOTAL_VOLUME(rover_id number)
+-- Get Total volume of a Rover by passing Rover ID --
+CREATE OR REPLACE FUNCTION TOTAL_VOLUME(rover_id number)
   RETURN float IS
   volume float;
   height number;
@@ -32,8 +32,8 @@ create FUNCTION TOTAL_VOLUME(rover_id number)
 
 
 
---check whether the communication is direct or indirect--
-create FUNCTION IS_DIRECT_COMMUNICATION(communication_id number)
+-- Check whether the communication is direct or indirect --
+CREATE OR REPLACE FUNCTION IS_DIRECT_COMMUNICATION(communication_id number)
   RETURN boolean IS
   com_orbiter_id number;
 
@@ -53,22 +53,8 @@ create FUNCTION IS_DIRECT_COMMUNICATION(communication_id number)
   END;
 /
 
--- Change Significance
-CREATE OR REPLACE TRIGGER CHANGE_SIGNIFICANCE
-  BEFORE INSERT ON IMAGES FOR EACH ROW
 
-  BEGIN
-    IF :NEW.SIGNIFICANCE > 70 THEN
-      :NEW.STORAGE_ID := 1;
-    ELSIF :NEW.SIGNIFICANCE >= 45 OR :NEW.SIGNIFICANCE <= 69 THEN
-      :NEW.STORAGE_ID := 2;
-    ELSE
-      :NEW.STORAGE_ID := 3;
-    END IF;
-  END;
-/
-
--- Get all Orbiter that a given Rover communicates with.
+-- Get all Orbiter that a given Rover communicates with --
 CREATE OR REPLACE FUNCTION GET_ORBITERS(ROVERID in NUMBER)
 
   -- define that the function will return a cursor
@@ -88,8 +74,10 @@ AS output SYS_REFCURSOR;
     -- return the output
     RETURN output;
   END;
+/
 
--- Get the All sensors of a Rover when a rover id is given
+
+-- Get the All sensors of a Rover when a rover id is given --
 CREATE OR REPLACE FUNCTION GET_SENSORS(ROVERID IN NUMBER)
 
   RETURN SYS_REFCURSOR
@@ -105,8 +93,10 @@ AS output SYS_REFCURSOR;
     RETURN output;
 
   END;
+/
 
--- Get all the Sensors that belongs to a certain type
+
+-- Get all the Sensors that belongs to a certain type --
 CREATE OR REPLACE FUNCTION GET_SENSORS_WITH_TYPE(ROVERID IN NUMBER, SENSORTYPE IN VARCHAR)
 
   RETURN SYS_REFCURSOR
@@ -124,8 +114,10 @@ AS output SYS_REFCURSOR;
     RETURN output;
 
   END;
+/
 
--- Get the coordinates of a ROVER
+
+-- Get the coordinates of a ROVER --
 CREATE OR REPLACE FUNCTION GET_COORDINATES(ROVERID IN NUMBER)
 
   RETURN SYS_REFCURSOR
@@ -142,3 +134,4 @@ AS output SYS_REFCURSOR;
                               WHERE ROVER_ID = ROVERID);
 
   END;
+/

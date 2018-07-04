@@ -52,3 +52,93 @@ create FUNCTION isDirectCommunication(communication_id number)
     end if;
   END;
 /
+
+-- Change Significance
+CREATE OR REPLACE TRIGGER ChangeSignificance
+  BEFORE INSERT ON IMAGES FOR EACH ROW
+
+  BEGIN
+    IF :NEW.SIGNIFICANCE > 70 THEN
+      :NEW.STORAGE_ID := 1;
+    ELSIF :NEW.SIGNIFICANCE >= 45 OR :NEW.SIGNIFICANCE <= 69 THEN
+      :NEW.STORAGE_ID := 2;
+    ELSE
+      :NEW.STORAGE_ID := 3;
+    END IF;
+  END;
+/
+
+-- Get all Orbiter that a given Rover communicates with.
+CREATE OR REPLACE FUNCTION GET_ORBITERS(ROVERID in NUMBER)
+
+  -- define that the function will return a cursor
+  RETURN SYS_REFCURSOR
+
+  -- set the variable to output the rows
+AS output SYS_REFCURSOR;
+
+  BEGIN
+    OPEN output
+    FOR SELECT * -- return every row to the output, so that the output can be returned
+        FROM ORBITER
+        WHERE ID IN (SELECT ID
+                     FROM COMMUNICATION
+                     WHERE ROVER_ID = ROVERID);
+
+    -- return the output
+    RETURN output;
+  END;
+
+-- Get the All sensors of a Rover when a rover id is given
+CREATE OR REPLACE FUNCTION GET_SENSORS(ROVERID IN NUMBER)
+
+  RETURN SYS_REFCURSOR
+
+AS output SYS_REFCURSOR;
+
+  BEGIN
+
+    OPEN output
+    FOR SELECT *
+        FROM SENSOR
+        WHERE SENSOR.ROVER_ID = ROVERID;
+    RETURN output;
+
+  END;
+
+-- Get all the Sensors that belongs to a certain type
+CREATE OR REPLACE FUNCTION GET_SENSORS_WITH_TYPE(ROVERID IN NUMBER, SENSORTYPE IN VARCHAR)
+
+  RETURN SYS_REFCURSOR
+
+AS output SYS_REFCURSOR;
+
+  BEGIN
+
+    OPEN output
+    FOR SELECT *
+        FROM SENSOR
+        WHERE ROVER_ID = ROVERID AND SENSOR_TYPE_ID = (SELECT ID
+                                                       FROM SENSORTYPE
+                                                       WHERE NAME = SENSORTYPE);
+    RETURN output;
+
+  END;
+
+-- Get the coordinates of a ROVER
+CREATE OR REPLACE FUNCTION GET_COORDINATES(ROVERID IN NUMBER)
+
+  RETURN SYS_REFCURSOR
+
+AS output SYS_REFCURSOR;
+
+  BEGIN
+
+    OPEN output
+    FOR SELECT *
+        FROM COORDINATES
+        WHERE COMPUTER_ID IN (SELECT ID
+                              FROM COMPUTER
+                              WHERE ROVER_ID = ROVERID);
+
+  END;

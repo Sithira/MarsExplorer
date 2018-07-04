@@ -1,5 +1,5 @@
 --Get Total volume of a Rover by passing Rover ID--
-create FUNCTION totalVolume(rover_id number)
+create FUNCTION TOTAL_VOLUME(rover_id number)
   RETURN float IS
   volume float;
   height number;
@@ -33,7 +33,7 @@ create FUNCTION totalVolume(rover_id number)
 
 
 --check whether the communication is direct or indirect--
-create FUNCTION isDirectCommunication(communication_id number)
+create FUNCTION IS_DIRECT_COMMUNICATION(communication_id number)
   RETURN boolean IS
   com_orbiter_id number;
 
@@ -54,7 +54,7 @@ create FUNCTION isDirectCommunication(communication_id number)
 /
 
 -- Change Significance
-CREATE OR REPLACE TRIGGER ChangeSignificance
+CREATE OR REPLACE TRIGGER CHANGE_SIGNIFICANCE
   BEFORE INSERT ON IMAGES FOR EACH ROW
 
   BEGIN

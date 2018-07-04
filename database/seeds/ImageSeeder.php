@@ -32,7 +32,7 @@ class ImageSeeder extends Seeder
             [
                 //'id' => 1,
                 'camera_id' => 3 ,
-                'storage_id' => 2,
+                'storage_id' => 6,
                 'data' => 'csdcs',
                 'significance' => 60,
                 'resolution' => '4096 x 2160'

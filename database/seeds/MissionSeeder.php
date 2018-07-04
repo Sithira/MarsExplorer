@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-
+DB::setDateFormat('MM/DD/YYYY');
 class MissionSeeder extends Seeder
 {
     /**
@@ -18,28 +18,28 @@ class MissionSeeder extends Seeder
                 'spacecraft_id' => 1 ,
                 'name' => 'Mars Exploration Rover',
                 'planet' => 'Mars',
-                'year' => '2003/0707'
+                'year' => '07/07/2003'
             ],
             [
                 //'id' => 2,
                 'spacecraft_id' => 2 ,
                 'name' => 'Planetary Undersurface Tool',
                 'planet' => 'Mars',
-                'year' => '2003/05/06'
+                'year' => '05/06/2003'
             ],
             [
                 //'id' => 1,
                 'spacecraft_id' => 3 ,
                 'name' => 'Mars Pathfinder',
                 'planet' => 'Mars',
-                'year' => '1997/07/04'
+                'year' => '07/04/1997'
             ],
             [
                 //'id' => 2,
                 'spacecraft_id' => 4 ,
                 'name' => 'Mars Science Laboratory',
                 'planet' => 'Mars',
-                'year' => '2011/11/26'
+                'year' => '11/26/2011'
             ]
         ]);
     }

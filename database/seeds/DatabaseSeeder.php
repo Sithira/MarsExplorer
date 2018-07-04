@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
          $this->call(CommunicationSeeder::class);
          $this->call(CameraTypeSeeder::class);
          $this->call(CameraSeeder::class);
+         $this->call(MastSubCameraSeeder::class);
          $this->call(ImageSeeder::class);
          $this->call(CoordinatesSeeder::class);
          $this->call(CopySeeder::class);

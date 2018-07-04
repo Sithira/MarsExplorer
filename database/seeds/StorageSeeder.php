@@ -27,6 +27,21 @@ class StorageSeeder extends Seeder
                 //'id' => 1,
                 'type' => 'C',
                 'capacity' => '1000TB'
+            ],
+            [
+                //'id' => 1,
+                'type' => 'A',
+                'capacity' => '1TB'
+            ],
+            [
+                //'id' => 1,
+                'type' => 'C',
+                'capacity' => '1000TB'
+            ],
+            [
+                //'id' => 1,
+                'type' => 'B',
+                'capacity' => '10TB'
             ]
         ]);
     }

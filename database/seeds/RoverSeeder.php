@@ -15,8 +15,9 @@ class RoverSeeder extends Seeder
         DB::table('rover')->insert([
             [
                 //'id' => 1,
-                'mission_id' => 1 ,
+                'mission_id' => 1,
                 'name' => 'Opportunity',
+                'state' => 'DEPLOYING',
                 'width' => '2.3m',
                 'height' => '1.5m',
                 'length' => '1.6m',
@@ -24,8 +25,9 @@ class RoverSeeder extends Seeder
             ],
             [
                 //'id' => 2,
-                'mission_id' => 2 ,
+                'mission_id' => 2,
                 'name' => 'Beagle 2',
+                'state' => 'LANDED',
                 'width' => '1m',
                 'height' => '0.25m',
                 'length' => '1.5m',
@@ -33,8 +35,9 @@ class RoverSeeder extends Seeder
             ],
             [
                 //'id' => 1,
-                'mission_id' => 3 ,
+                'mission_id' => 3,
                 'name' => 'Sojourner',
+                'state' => 'READY',
                 'width' => '0.7m',
                 'height' => '1m',
                 'length' => '0.65m',
@@ -42,8 +45,9 @@ class RoverSeeder extends Seeder
             ],
             [
                 //'id' => 2,
-                'mission_id' => 4 ,
+                'mission_id' => 4,
                 'name' => 'Curiosity',
+                'state' => '',
                 'width' => '2.7m',
                 'height' => '2.2m',
                 'length' => '2.9',

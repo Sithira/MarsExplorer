@@ -147,21 +147,21 @@ CREATE trigger BI_IMAGES
 /
 
 
--- Copy Table --
-CREATE TABLE Copy (
+-- CoordinateCopy Table --
+CREATE TABLE CoordinateCopy (
   id NUMBER(4),
   computer_id NUMBER(4),
-  coordinate_id NUMBER(4),
+  data VARCHAR2(50),
   constraint COPY_PK PRIMARY KEY (id)
 )
 /
-CREATE sequence COPY_SEQ
+CREATE sequence COORDINATECOPY_SEQ
 /
-CREATE trigger BI_COPY
-  before insert on Copy
+CREATE trigger BI_COORDINATECOPY
+  before insert on CoordinateCopy
   for each row
   begin
-    select COPY_SEQ.nextval into :NEW.id from dual;
+    select COORDINATECOPY_SEQ.nextval into :NEW.id from dual;
   end;
 /
 
@@ -389,11 +389,12 @@ CREATE trigger BI_SPACECRAFT
 CREATE TABLE Communication (
   id NUMBER(4),
   rover_id NUMBER(4),
-  orbiter_id NUMBER(4),
+  orbiter_id NUMBER(4) NULL,
   cmode VARCHAR2(50),
   type VARCHAR2(50),
   band VARCHAR2(50),
-  constraint COMMUNICATION_PK PRIMARY KEY (id)
+  constraint COMMUNICATION_PK PRIMARY KEY (id),
+  constraint TYPE_CHECK CHECK(type IN ('DIRECT','INDIRECT'))
 )
 /
 CREATE sequence COMMUNICATION_SEQ
@@ -446,8 +447,7 @@ ALTER TABLE Coordinates ADD CONSTRAINT Coordinates_fk1 FOREIGN KEY (image_id) RE
 ALTER TABLE Images ADD CONSTRAINT Images_fk0 FOREIGN KEY (camera_id) REFERENCES Camera(id) ON DELETE CASCADE;
 ALTER TABLE Images ADD CONSTRAINT Images_fk1 FOREIGN KEY (storage_id) REFERENCES Storage(id) ON DELETE CASCADE;
 
-ALTER TABLE Copy ADD CONSTRAINT Copy_fk0 FOREIGN KEY (computer_id) REFERENCES Computer(id) ON DELETE CASCADE;
-ALTER TABLE Copy ADD CONSTRAINT Copy_fk1 FOREIGN KEY (coordinate_id) REFERENCES Coordinates(id) ON DELETE CASCADE;
+ALTER TABLE CoordinateCopy ADD CONSTRAINT Copy_fk0 FOREIGN KEY (computer_id) REFERENCES Computer(id) ON DELETE CASCADE;
 
 ALTER TABLE Radiation ADD CONSTRAINT Radiation_fk0 FOREIGN KEY (coordinate_id) REFERENCES Coordinates(id) ON DELETE CASCADE;
 
@@ -459,6 +459,7 @@ ALTER TABLE Camera ADD CONSTRAINT Camera_fk0 FOREIGN KEY (rover_id) REFERENCES R
 ALTER TABLE Camera ADD CONSTRAINT Camera_fk1 FOREIGN KEY (camera_type_id) REFERENCES CameraType(id) ON DELETE CASCADE;
 
 ALTER TABLE MastSubCamera ADD CONSTRAINT MastSubCamera_fk0 FOREIGN KEY (camera_id) REFERENCES Camera(id) ON DELETE CASCADE;
+
 ALTER TABLE Instrument ADD CONSTRAINT Instrument_fk0 FOREIGN KEY (camera_id) REFERENCES Camera(id) ON DELETE CASCADE;
 
 ALTER TABLE Sensor ADD CONSTRAINT Sensor_fk0 FOREIGN KEY (rover_id) REFERENCES Rover(id) ON DELETE CASCADE;

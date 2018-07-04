@@ -12,7 +12,7 @@ class MastSubCameraSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('images')->insert([
+        DB::table('mastsubcamera')->insert([
             [
                 //'id' => 1,
                 'camera_id' => 1,

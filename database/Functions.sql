@@ -57,8 +57,6 @@ CREATE OR REPLACE FUNCTION IS_DIRECT_COMMUNICATION(communication_id number)
   END;
 /
 
-
-
 -- Get all Orbiter that a given Rover communicates with.
 CREATE OR REPLACE FUNCTION GET_ORBITERS(ROVERID in NUMBER)
 
@@ -93,8 +91,9 @@ AS output SYS_REFCURSOR;
 
     OPEN output
     FOR SELECT *
-        FROM SENSOR
-        WHERE SENSOR.ROVER_ID = ROVERID;
+        FROM SENSOR SEN
+          JOIN SENSORTYPE S on SEN.SENSOR_TYPE_ID = S.ID
+        WHERE SEN.ROVER_ID = ROVERID;
     RETURN output;
 
   END;
@@ -132,11 +131,12 @@ AS output SYS_REFCURSOR;
 
     OPEN output
     FOR SELECT *
-        FROM COORDINATES
-        WHERE COMPUTER_ID IN (SELECT ID
-                              FROM COMPUTER
-                              WHERE ROVER_ID = ROVERID);
+        FROM COORDINATES CORDS
+          JOIN COMPUTER C2 on CORDS.COMPUTER_ID = C2.ID
+        WHERE C2.ROVER_ID = ROVERID;
 
-  END
+    RETURN output;
+
+  END;
   /
 

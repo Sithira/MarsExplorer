@@ -1,23 +1,24 @@
-@extends('layouts.app')
+@extends('system.system_layout')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
+    @include('system.partials.__topbar')
+@endsection
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+@section('javascript')
+    <script type="text/javascript">
+        $(document).ready(function(){
 
-                    You are logged in!
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+            demo.initChartist();
+
+            $.notify({
+                icon: 'ti-user',
+                message: "<b>Welcome, {!! Auth::user()->username !!}</b>"
+
+            },{
+                type: 'success',
+                timer: 2000
+            });
+
+        });
+    </script>
 @endsection

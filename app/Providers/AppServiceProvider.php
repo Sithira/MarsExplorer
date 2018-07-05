@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        DB::setDateFormat('MM/DD/YYYY');
+        DB::setDateFormat('YYYY-MM-DD HH24:MI:SS');
 
         DB::enableQueryLog();
     }

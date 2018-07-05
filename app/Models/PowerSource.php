@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\PowerSource whereNAME($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\PowerSource whereROVERID($value)
  * @mixin \Eloquent
+ * @property float|null $CURRENT_LEVEL
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\PowerSource whereCURRENTLEVEL($value)
  */
 class PowerSource extends Model
 {

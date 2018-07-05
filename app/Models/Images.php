@@ -20,6 +20,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Images whereSIGNIFICANCE($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Images whereSTORAGEID($value)
  * @mixin \Eloquent
+ * @property string|null $DATA
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Images whereDATA($value)
  */
 class Images extends Model
 {

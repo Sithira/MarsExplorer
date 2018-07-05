@@ -24,6 +24,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Camera whereRESOLUTION($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Camera whereROVERID($value)
  * @mixin \Eloquent
+ * @property int|null $CAMERA_TYPE_ID
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Camera whereCAMERATYPEID($value)
  */
 class Camera extends Model
 {

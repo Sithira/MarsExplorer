@@ -28,6 +28,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Rover whereWHEELCOUNT($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Rover whereWIDTH($value)
  * @mixin \Eloquent
+ * @property string|null $STATE
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Rover whereSTATE($value)
  */
 class Rover extends Model
 {

@@ -19,4 +19,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/rovers', 'RoverController@index')->name('rovers');
+
+Route::get('/rovers/{id}', 'RoverController@show')->name('rovers.show');
+
 Route::get('/test', 'RoverController@index');

@@ -17,6 +17,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Sensor whereROVERID($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Sensor whereTYPE($value)
  * @mixin \Eloquent
+ * @property int|null $PARENT_ID
+ * @property int|null $CAMERA_ID
+ * @property int|null $SENSOR_TYPE_ID
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Sensor whereCAMERAID($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Sensor wherePARENTID($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Sensor whereSENSORTYPEID($value)
  */
 class Sensor extends Model
 {

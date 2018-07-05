@@ -17,6 +17,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Instrument whereNAME($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Instrument wherePURPOSE($value)
  * @mixin \Eloquent
+ * @property int|null $CAMERA_ID
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Instrument whereCAMERAID($value)
  */
 class Instrument extends Model
 {

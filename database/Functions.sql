@@ -57,24 +57,7 @@ CREATE OR REPLACE FUNCTION IS_DIRECT_COMMUNICATION(communication_id number)
   END;
 /
 
--- Change Significance
-CREATE OR REPLACE TRIGGER CHANGE_SIGNIFICANCE
-  BEFORE INSERT
-  ON IMAGES
-  FOR EACH ROW
 
-  BEGIN
-    IF :NEW.SIGNIFICANCE > 70
-    THEN
-      :NEW.STORAGE_ID := 1;
-    ELSIF :NEW.SIGNIFICANCE >= 45 OR :NEW.SIGNIFICANCE <= 69
-      THEN
-        :NEW.STORAGE_ID := 2;
-    ELSE
-      :NEW.STORAGE_ID := 3;
-    END IF;
-  END;
-/
 
 -- Get all Orbiter that a given Rover communicates with.
 CREATE OR REPLACE FUNCTION GET_ORBITERS(ROVERID in NUMBER)
@@ -97,6 +80,7 @@ AS output SYS_REFCURSOR;
     RETURN output;
   END;
 /
+
 
 -- Get the All sensors of a Rover when a rover id is given --
 CREATE OR REPLACE FUNCTION GET_SENSORS(ROVERID IN NUMBER)

@@ -70,6 +70,7 @@ CREATE TABLE PowerSource (
   id NUMBER(4),
   rover_id NUMBER(4),
   name VARCHAR2(50),
+  current_level FLOAT,
   constraint POWERSOURCE_PK PRIMARY KEY (id)
 )
 /

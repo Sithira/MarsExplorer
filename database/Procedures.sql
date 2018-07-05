@@ -10,7 +10,7 @@ IS
   END;
 /
 
--- Get the number of malfunctioning orbiters for a given rover
+-- Get the number of malfunctioning orbiters for a given rover --
 CREATE OR REPLACE PROCEDURE NO_OF_MALFUNCTIONING_ORBITERS(ROVERID IN NUMBER, NUM OUT NUMBER)
 IS
   BEGIN
@@ -24,7 +24,8 @@ IS
   END;
   /
 
--- Make a random orbiter malfunction
+
+-- Make a random orbiter malfunction --
 CREATE OR REPLACE PROCEDURE MAKE_ORBITER_MALFUNCTIONING
 IS
 
@@ -61,7 +62,7 @@ IS
   END;
 /
 
--- Dynamically set the main camera of the given rover.
+-- Dynamically set the main camera of the given rover --
 CREATE OR REPLACE PROCEDURE SET_MAIN_CAM_RANDOM(ROVERID IN NUMBER)
 
   -- declare the required variables

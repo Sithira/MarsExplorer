@@ -15,19 +15,23 @@ class PowerSourceSeeder extends Seeder
         DB::table('powersource')->insert([
             [
                 'rover_id' => 1,
-                'name' => 'Nuclear generator'
+                'name' => 'Nuclear generator',
+                'current_level' => 3
             ],
             [
                 'rover_id' => 2,
-                'name' => 'Solar power'
+                'name' => 'Solar power',
+                'current_level' => 10
             ],
             [
                 'rover_id' => 3,
-                'name' => 'Solar power'
+                'name' => 'Solar power',
+                'current_level' => 45
             ],
             [
                 'rover_id' => 4,
-                'name' => 'Nuclear generator'
+                'name' => 'Nuclear generator',
+                'current_level' => 80
             ]
         ]);
     }

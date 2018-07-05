@@ -10,6 +10,57 @@ IS
   END;
 /
 
+-- Get the number of malfunctioning orbiters for a given rover
+CREATE OR REPLACE PROCEDURE NO_OF_MALFUNCTIONING_ORBITERS(ROVERID IN NUMBER, NUM OUT NUMBER)
+IS
+  BEGIN
+    SELECT COUNT(ID)
+    INTO NUM
+    FROM ORBITER
+    WHERE ID IN (SELECT ID -- get the orbiters using the communicators that the selected rover is using.
+                 FROM COMMUNICATION
+                 WHERE ROVER_ID = ROVERID)
+          AND ISMALFUNCTIONING = 1; -- get only the malfunction orbiters
+  END;
+  /
+
+-- Make a random orbiter malfunction
+CREATE OR REPLACE PROCEDURE MAKE_ORBITER_MALFUNCTIONING
+IS
+
+  -- init the variables
+  orb_count      NUMBER;
+
+  rand_selection NUMBER;
+
+  -- make the data type to hold all the orbiters into one place
+  TYPE ORBITERS_ARRAY IS TABLE OF ORBITER%ROWTYPE INDEX BY PLS_INTEGER;
+
+  -- create the variable with created variable type
+  orb_array      ORBITERS_ARRAY;
+
+  BEGIN
+
+    -- Select all orbiters into the array
+    SELECT *
+    BULK COLLECT INTO orb_array
+    FROM ORBITER
+    WHERE ISMALFUNCTIONING = 0;
+
+    -- get the count of the array
+    orb_count := orb_array.COUNT;
+
+    -- select a random value between 1 and the orb count
+    SELECT round(dbms_random.value(1, orb_count)) output
+    INTO rand_selection
+    FROM dual;
+
+    -- update the randomly selected orbiter ( make malfunctioning )
+    UPDATE ORBITER SET ISMALFUNCTIONING = 1 WHERE ID = orb_array(rand_selection).ID;
+
+  END;
+/
+
 -- Dynamically set the main camera of the given rover.
 CREATE OR REPLACE PROCEDURE SET_MAIN_CAM_RANDOM(ROVERID IN NUMBER)
 

@@ -1,36 +1,38 @@
 --Get Total volume of a Rover by passing Rover ID--
 create FUNCTION TOTAL_VOLUME(rover_id number)
   RETURN float IS
-  volume float;
-  height number;
-  length number;
-  width number;
+  volume   float;
+  height   number;
+  length   number;
+  width    number;
   r_height varchar2(10);
   r_length varchar2(10);
-  r_width varchar2(10);
+  r_width  varchar2(10);
 
   BEGIN
-    SELECT HEIGHT, LENGTH, WIDTH into r_height, r_length, r_width
+    SELECT
+      HEIGHT,
+      LENGTH,
+      WIDTH
+    into r_height, r_length, r_width
     FROM ROVER
     WHERE id = rover_id;
-    r_height := replace(r_height,'m');
+    r_height := replace(r_height, 'm');
     height := to_number(r_height);
     dbms_output.put_line(height);
 
-    r_length := replace(r_length,'m');
+    r_length := replace(r_length, 'm');
     length := to_number(r_length);
     dbms_output.put_line(length);
 
-    r_width := replace(r_width,'m');
+    r_width := replace(r_width, 'm');
     width := to_number(r_width);
     dbms_output.put_line(width);
 
-    volume:= height*length*width;
+    volume := height * length * width;
     RETURN volume;
   END;
 /
-
-
 
 --check whether the communication is direct or indirect--
 create FUNCTION IS_DIRECT_COMMUNICATION(communication_id number)
@@ -38,30 +40,35 @@ create FUNCTION IS_DIRECT_COMMUNICATION(communication_id number)
   com_orbiter_id number;
 
   BEGIN
-    SELECT ORBITER_ID into com_orbiter_id
+    SELECT ORBITER_ID
+    into com_orbiter_id
     FROM COMMUNICATION
     WHERE id = communication_id;
 
     if com_orbiter_id is null
-      then
-        dbms_output.put_line('orbiter id null');
-        RETURN true;
-      else
-        dbms_output.put_line('orbiter id not null');
-        RETURN false;
+    then
+      dbms_output.put_line('orbiter id null');
+      RETURN true;
+    else
+      dbms_output.put_line('orbiter id not null');
+      RETURN false;
     end if;
   END;
 /
 
 -- Change Significance
 CREATE OR REPLACE TRIGGER CHANGE_SIGNIFICANCE
-  BEFORE INSERT ON IMAGES FOR EACH ROW
+  BEFORE INSERT
+  ON IMAGES
+  FOR EACH ROW
 
   BEGIN
-    IF :NEW.SIGNIFICANCE > 70 THEN
+    IF :NEW.SIGNIFICANCE > 70
+    THEN
       :NEW.STORAGE_ID := 1;
-    ELSIF :NEW.SIGNIFICANCE >= 45 OR :NEW.SIGNIFICANCE <= 69 THEN
-      :NEW.STORAGE_ID := 2;
+    ELSIF :NEW.SIGNIFICANCE >= 45 OR :NEW.SIGNIFICANCE <= 69
+      THEN
+        :NEW.STORAGE_ID := 2;
     ELSE
       :NEW.STORAGE_ID := 3;
     END IF;
@@ -88,6 +95,7 @@ AS output SYS_REFCURSOR;
     -- return the output
     RETURN output;
   END;
+/
 
 -- Get the All sensors of a Rover when a rover id is given
 CREATE OR REPLACE FUNCTION GET_SENSORS(ROVERID IN NUMBER)
@@ -105,6 +113,7 @@ AS output SYS_REFCURSOR;
     RETURN output;
 
   END;
+/
 
 -- Get all the Sensors that belongs to a certain type
 CREATE OR REPLACE FUNCTION GET_SENSORS_WITH_TYPE(ROVERID IN NUMBER, SENSORTYPE IN VARCHAR)
@@ -124,6 +133,7 @@ AS output SYS_REFCURSOR;
     RETURN output;
 
   END;
+/
 
 -- Get the coordinates of a ROVER
 CREATE OR REPLACE FUNCTION GET_COORDINATES(ROVERID IN NUMBER)
@@ -141,4 +151,5 @@ AS output SYS_REFCURSOR;
                               FROM COMPUTER
                               WHERE ROVER_ID = ROVERID);
 
-  END;
+  END
+  /

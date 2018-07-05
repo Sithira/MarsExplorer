@@ -14,7 +14,7 @@ CREATE TABLE Rover (
 /
 CREATE sequence ROVER_SEQ
 /
-CREATE trigger BI_ROVER
+CREATE OR REPLACE trigger BI_ROVER
   before insert on Rover
   for each row
   begin
@@ -35,7 +35,7 @@ CREATE TABLE Mission (
 /
 CREATE sequence MISSION_SEQ
 /
-CREATE trigger BI_MISSION
+CREATE OR REPLACE trigger BI_MISSION
   before insert on Mission
   for each row
   begin
@@ -56,7 +56,7 @@ CREATE TABLE Objectives (
 /
 CREATE sequence OBJECTIVES_SEQ
 /
-CREATE trigger BI_OBJECTIVES
+CREATE OR REPLACE trigger BI_OBJECTIVES
   before insert on Objectives
   for each row
   begin
@@ -75,7 +75,7 @@ CREATE TABLE PowerSource (
 /
 CREATE sequence POWERSOURCE_SEQ
 /
-CREATE trigger BI_POWERSOURCE
+CREATE OR REPLACE trigger BI_POWERSOURCE
   before insert on PowerSource
   for each row
   begin
@@ -96,7 +96,7 @@ CREATE TABLE Computer (
 /
 CREATE sequence COMPUTER_SEQ
 /
-CREATE trigger BI_COMPUTER
+CREATE OR REPLACE trigger BI_COMPUTER
   before insert on Computer
   for each row
   begin
@@ -116,7 +116,7 @@ CREATE TABLE Coordinates (
 /
 CREATE sequence COORDINATES_SEQ
 /
-CREATE trigger BI_COORDINATES
+CREATE OR REPLACE trigger BI_COORDINATES
   before insert on Coordinates
   for each row
   begin
@@ -138,7 +138,7 @@ CREATE TABLE Images (
 /
 CREATE sequence IMAGES_SEQ
 /
-CREATE trigger BI_IMAGES
+CREATE OR REPLACE trigger BI_IMAGES
   before insert on Images
   for each row
   begin
@@ -157,7 +157,7 @@ CREATE TABLE CoordinateCopy (
 /
 CREATE sequence COORDINATECOPY_SEQ
 /
-CREATE trigger BI_COORDINATECOPY
+CREATE OR REPLACE trigger BI_COORDINATECOPY
   before insert on CoordinateCopy
   for each row
   begin
@@ -177,7 +177,7 @@ CREATE TABLE Radiation (
 /
 CREATE sequence RADIATION_SEQ
 /
-CREATE trigger BI_RADIATION
+CREATE OR REPLACE trigger BI_RADIATION
   before insert on Radiation
   for each row
   begin
@@ -196,7 +196,7 @@ CREATE TABLE Surface (
 /
 CREATE sequence SURFACE_SEQ
 /
-CREATE trigger BI_SURFACE
+CREATE OR REPLACE trigger BI_SURFACE
   before insert on Surface
   for each row
   begin
@@ -215,7 +215,7 @@ CREATE TABLE Interior (
 /
 CREATE sequence INTERIOR_SEQ
 /
-CREATE trigger BI_INTERIOR
+CREATE OR REPLACE trigger BI_INTERIOR
   before insert on Interior
   for each row
   begin
@@ -234,7 +234,7 @@ CREATE TABLE Storage (
 /
 CREATE sequence STORAGE_SEQ
 /
-CREATE trigger BI_STORAGE
+CREATE OR REPLACE trigger BI_STORAGE
   before insert on Storage
   for each row
   begin
@@ -258,7 +258,7 @@ CREATE TABLE Camera (
 /
 CREATE sequence CAMERA_SEQ
 /
-CREATE trigger BI_CAMERA
+CREATE OR REPLACE trigger BI_CAMERA
   before insert on Camera
   for each row
   begin
@@ -276,7 +276,7 @@ CREATE TABLE CameraType (
 /
 CREATE sequence CAMERATYPE_SEQ
 /
-CREATE trigger BI_CAMERATYPE
+CREATE OR REPLACE trigger BI_CAMERATYPE
   before insert on CameraType
   for each row
   begin
@@ -297,7 +297,7 @@ CREATE TABLE MastSubCamera (
 /
 CREATE sequence MASTSUBCAMERA_SEQ
 /
-CREATE trigger BI_MATSUBCAMERA
+CREATE OR REPLACE trigger BI_MATSUBCAMERA
   before insert on MastSubCamera
   for each row
   begin
@@ -317,7 +317,7 @@ CREATE TABLE Instrument (
 /
 CREATE sequence INSTRUMENT_SEQ
 /
-CREATE trigger BI_INSTRUMENT
+CREATE OR REPLACE trigger BI_INSTRUMENT
   before insert on Instrument
   for each row
   begin
@@ -339,7 +339,7 @@ CREATE TABLE Sensor (
 /
 CREATE sequence SENSOR_SEQ
 /
-CREATE trigger BI_SENSOR
+CREATE OR REPLACE trigger BI_SENSOR
   before insert on Sensor
   for each row
   begin
@@ -357,7 +357,7 @@ CREATE TABLE SensorType (
 /
 CREATE sequence SENSORTYPE_SEQ
 /
-CREATE trigger BI_SENSORTYPE
+CREATE OR REPLACE trigger BI_SENSORTYPE
   before insert on SensorType
   for each row
   begin
@@ -376,7 +376,7 @@ CREATE TABLE SpaceCraft (
 /
 CREATE sequence SPACECRAFT_SEQ
 /
-CREATE trigger BI_SPACECRAFT
+CREATE OR REPLACE trigger BI_SPACECRAFT
   before insert on SpaceCraft
   for each row
   begin
@@ -399,7 +399,7 @@ CREATE TABLE Communication (
 /
 CREATE sequence COMMUNICATION_SEQ
 /
-CREATE trigger BI_COMMUNICATION
+CREATE OR REPLACE trigger BI_COMMUNICATION
   before insert on Communication
   for each row
   begin
@@ -421,7 +421,7 @@ CREATE TABLE Orbiter (
 /
 CREATE sequence ORBITER_SEQ
 /
-CREATE trigger BI_ORBITER
+CREATE OR REPLACE trigger BI_ORBITER
   before insert on Orbiter
   for each row
   begin

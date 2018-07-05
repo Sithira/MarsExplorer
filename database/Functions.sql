@@ -1,5 +1,5 @@
---Get Total volume of a Rover by passing Rover ID--
-create FUNCTION TOTAL_VOLUME(rover_id number)
+-- Get Total volume of a Rover by passing Rover ID --
+CREATE OR REPLACE FUNCTION TOTAL_VOLUME(rover_id number)
   RETURN float IS
   volume   float;
   height   number;
@@ -34,8 +34,9 @@ create FUNCTION TOTAL_VOLUME(rover_id number)
   END;
 /
 
---check whether the communication is direct or indirect--
-create FUNCTION IS_DIRECT_COMMUNICATION(communication_id number)
+-- Check whether the communication is direct or indirect --
+CREATE OR REPLACE FUNCTION IS_DIRECT_COMMUNICATION(communication_id number)
+
   RETURN boolean IS
   com_orbiter_id number;
 
@@ -97,7 +98,7 @@ AS output SYS_REFCURSOR;
   END;
 /
 
--- Get the All sensors of a Rover when a rover id is given
+-- Get the All sensors of a Rover when a rover id is given --
 CREATE OR REPLACE FUNCTION GET_SENSORS(ROVERID IN NUMBER)
 
   RETURN SYS_REFCURSOR
@@ -115,7 +116,7 @@ AS output SYS_REFCURSOR;
   END;
 /
 
--- Get all the Sensors that belongs to a certain type
+-- Get all the Sensors that belongs to a certain type --
 CREATE OR REPLACE FUNCTION GET_SENSORS_WITH_TYPE(ROVERID IN NUMBER, SENSORTYPE IN VARCHAR)
 
   RETURN SYS_REFCURSOR
@@ -135,7 +136,8 @@ AS output SYS_REFCURSOR;
   END;
 /
 
--- Get the coordinates of a ROVER
+
+-- Get the coordinates of a ROVER --
 CREATE OR REPLACE FUNCTION GET_COORDINATES(ROVERID IN NUMBER)
 
   RETURN SYS_REFCURSOR
@@ -153,3 +155,4 @@ AS output SYS_REFCURSOR;
 
   END
   /
+

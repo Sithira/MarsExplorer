@@ -1,4 +1,4 @@
---Get the no of Cameras when Rover ID and Camera type is given--
+-- Get the no.of Cameras when Rover ID and Camera type is given --
 CREATE OR REPLACE PROCEDURE NO_OF_CAMERAS(cameraType IN varchar2, rover_id IN varchar2, no OUT number)
 IS
   BEGIN

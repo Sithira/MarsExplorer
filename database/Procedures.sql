@@ -10,6 +10,7 @@ IS
   END;
 /
 
+
 -- Get the number of malfunctioning orbiters for a given rover --
 CREATE OR REPLACE PROCEDURE NO_OF_MALFUNCTIONING_ORBITERS(ROVERID IN NUMBER, NUM OUT NUMBER)
 IS
@@ -62,6 +63,7 @@ IS
   END;
 /
 
+
 -- Dynamically set the main camera of the given rover --
 CREATE OR REPLACE PROCEDURE SET_MAIN_CAM_RANDOM(ROVERID IN NUMBER)
 
@@ -98,5 +100,19 @@ IS
     UPDATE CAMERA
     SET ISMAINCAM = 1
     WHERE ID = ROV_CAMS(rand_num).ID;
+  END;
+/
+
+-- Get Power Source ID of the Rower that explore the given Coordinate --
+CREATE OR REPLACE PROCEDURE GET_POWERSOURCE_ID(coordinate_id   IN  number, powesource_id OUT number)
+AS
+  BEGIN
+    SELECT
+      POWERSOURCE.ID
+    INTO powesource_id
+    FROM POWERSOURCE
+      INNER JOIN COMPUTER ON COMPUTER.ROVER_ID = POWERSOURCE.ROVER_ID
+      INNER JOIN COORDINATES ON COMPUTER.ID = COORDINATES.COMPUTER_ID
+    WHERE COORDINATES.ID = coordinate_id;
   END;
 /

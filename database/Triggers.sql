@@ -124,3 +124,19 @@ CREATE OR REPLACE TRIGGER ROVER_STATE_ONNULL
     END IF;
   END;
 /
+
+-- Change power level of the rover when Rover explore new Coordinate --
+CREATE OR REPLACE TRIGGER CHANGE_POWER_LEVEL
+  AFTER INSERT ON COORDINATES FOR EACH ROW
+
+  DECLARE
+    new_level number;
+    powersource_id number;
+  BEGIN
+    new_level := dbms_random.value(1,100);
+    GET_POWERSOURCE_ID(:new.ID, powersource_id);
+    UPDATE POWERSOURCE
+      SET CURRENT_LEVEL = ROUND(new_level)
+      WHERE ID = powersource_id;
+  END;
+/

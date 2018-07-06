@@ -23,4 +23,6 @@ Route::get('/rovers', 'RoverController@index')->name('rovers');
 
 Route::get('/rovers/{id}', 'RoverController@show')->name('rovers.show');
 
-Route::get('/test', 'RoverController@index');
+Route::get('/test', function() {
+    (new \App\Http\Controllers\ExplorerMarsController())->explore(1);
+});

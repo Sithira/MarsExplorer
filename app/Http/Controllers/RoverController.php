@@ -52,7 +52,7 @@ class RoverController extends Controller
 
             $volume = DB::selectOne("SELECT TOTAL_VOLUME($id) AS VOLUME_TOT FROM dual");
 
-            $orbiterList = DB::selectOne("SELECT GET_ORBITERS($id) AS ORBS FROM dual");
+            $orbiterList = DB::select("SELECT GET_ORBITERS($id) AS ORBS FROM dual");
 
             $communicationAndComputer = DB::selectOne("SELECT GET_COORDINATES($id) AS CORDS FROM dual");
 

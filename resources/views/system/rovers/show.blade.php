@@ -32,6 +32,7 @@
 
     </div>
 
+    <!-- SENSORS -->
     <div class="row">
         <div class="col-md-12">
             <h3><i class="ti-signal"></i> SENSORS</h3>
@@ -49,11 +50,42 @@
 
                         <h3 class="card-title text-center">{!! $sensor->name !!}</h3>
 
+                        <div class="text-center">
+                            <p>{!! $sensor->type !!}</p>
+                        </div>
+
                     </div>
                 </div>
             </div>
         @endforeach
 
+    </div>
+
+    <!-- Orbiters -->
+    <div class="row">
+        <div class="col-md-12">
+            <h3><i class="ti-layout-media-right"></i> Orbiters</h3>
+        </div>
+
+        @foreach($orbiterList as $orbiter)
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <img width="80px" src="/assets/img/icon-images/rover-orbiter.png" alt="#" class="card-img-top">
+                        </div>
+
+                        <h3 class="card-title text-center">{!! $orbiter->type !!}</h3>
+
+                        <div class="text-center">
+                            <p>Planet: {!! $orbiter->planet !!}</p>
+                            <p>Mode: {!! $orbiter->cmode !!}</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        @endforeach
     </div>
 
 @endsection

@@ -84,7 +84,11 @@ class RoverController extends Controller
      */
     public function images($roverId)
     {
-        $sql = "SELECT CORD.DATA as coordinates, IMG.* FROM IMAGES IMG JOIN COORDINATES CORD ON IMG.ID = CORD.IMAGE_ID WHERE CAMERA_ID IN (SELECT ID FROM CAMERA WHERE ROVER_ID = $roverId)";
+        $sql = "SELECT CORD.DATA as coordinates, 
+                IMG.* FROM IMAGES IMG 
+                JOIN COORDINATES CORD ON IMG.ID = CORD.IMAGE_ID 
+                WHERE CAMERA_ID 
+                IN (SELECT ID FROM CAMERA WHERE ROVER_ID = $roverId)";
 
         $images = DB::select($sql);
 

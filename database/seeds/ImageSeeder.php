@@ -17,7 +17,7 @@ class ImageSeeder extends Seeder
                 //'id' => 1,
                 'camera_id' => 1 ,
                 'storage_id' => 1,
-                'data' => '',
+                'data' => 'Image 1',
                 'significance' => 75,
                 'resolution' => '1600 x 1200'
             ],
@@ -25,7 +25,7 @@ class ImageSeeder extends Seeder
                 //'id' => 2,
                 'camera_id' => 2 ,
                 'storage_id' => 2,
-                'data' => 'cdsc',
+                'data' => 'Image 2',
                 'significance' => 55,
                 'resolution' => '3840 x 2160'
             ],
@@ -33,7 +33,7 @@ class ImageSeeder extends Seeder
                 //'id' => 1,
                 'camera_id' => 3 ,
                 'storage_id' => 6,
-                'data' => 'csdcs',
+                'data' => 'Image 3',
                 'significance' => 60,
                 'resolution' => '4096 x 2160'
             ],
@@ -41,7 +41,7 @@ class ImageSeeder extends Seeder
                 //'id' => 2,
                 'camera_id' => 4 ,
                 'storage_id' => 3,
-                'data' => 'dsadas',
+                'data' => 'Image 4',
                 'significance' => 32,
                 'resolution' => '1280 x 720'
             ]

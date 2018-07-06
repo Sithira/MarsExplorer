@@ -65,13 +65,14 @@ class ExplorerMarsController extends Controller
                     array('computer_id' => $computer, 'image_id' => $newImage, 'data' => $data)
                 );
 
-                // let the user that the rover has successfully explored mars
-                flash()->success("Mars Successfully Explored !");
-
-                // redirect the user
-                return redirect()->back();
-
             }
+
+            // let the user that the rover has successfully explored mars
+            flash()->success("Mars Successfully Explored !");
+
+            // redirect the user
+            return redirect()->back();
+
 
         }
         else

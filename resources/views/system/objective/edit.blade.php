@@ -6,6 +6,9 @@
         <div class="col-md-8 col-md-offset-2">
 
             <div class="card" style="padding: 10px">
+
+                @include('vendor.flash.ErrorFlash')
+
                 {!! Form::open(['method' => 'POST', 'action' => ['ObjectiveController@update', $roverId, $objective->id]]) !!}
 
                 {!! Form::hidden('rover_id', $roverId) !!}

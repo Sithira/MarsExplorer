@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Rover;
 use DB;
 use Illuminate\Http\Request;
 

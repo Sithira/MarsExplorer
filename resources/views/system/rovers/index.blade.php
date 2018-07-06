@@ -7,6 +7,9 @@
                 <br />
                 <a href="#" data-toggle="modal" data-target="#exampleModalLong" class="btn btn-primary btn-sm"><i class="far fa-plus-square"></i> Add New Rover</a>
             </h3>
+
+            @include('vendor.flash.ErrorFlash')
+
         </div>
 
         @foreach($rovers as $rover)
@@ -19,8 +22,6 @@
                         <div class="text-center">
                             <a href="{!! route('rovers.show', $rover->id) !!}" class="btn btn-primary">View More Info</a>
                         </div>
-
-                        <br />
 
                     </div>
                 </div>

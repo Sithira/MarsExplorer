@@ -7,7 +7,10 @@
     <h3 class="title">{!! $rover->name !!}</h3>
 
     <br />
-    <a class="btn btn-danger" href="/rover/{!! $rover->id !!}/explore">Explore Mars using {!! $rover->name !!}</a>
+    <a class="btn btn-danger" href="/rover/{!! $rover->id !!}/explore"><i class="ti-search"></i> Explore Mars using {!! $rover->name !!}</a>
+    &nbsp;
+    &nbsp;
+    <a class="btn btn-success" href="{!! url()->current() !!}/objectives/create"><i class="ti-plus"></i> Add new Objective to the rover</a>
     <br />
 
     <!-- CAMERAS -->

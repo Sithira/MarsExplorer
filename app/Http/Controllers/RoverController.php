@@ -31,6 +31,12 @@ class RoverController extends Controller
         return view('system.rovers.index', compact('rovers', 'roverTypes'));
     }
 
+    /**
+     * Get all the details about a rover
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
     public function show($id)
     {
 
@@ -68,5 +74,43 @@ class RoverController extends Controller
             return redirect()->back();
         }
 
+    }
+
+    /**
+     * Get all the images that belongs to an rover.
+     *
+     * @param $roverId
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function images($roverId)
+    {
+        $sql = "SELECT CORD.DATA as coordinates, IMG.* FROM IMAGES IMG JOIN COORDINATES CORD ON IMG.ID = CORD.IMAGE_ID WHERE CAMERA_ID IN (SELECT ID FROM CAMERA WHERE ROVER_ID = $roverId)";
+
+        $images = DB::select($sql);
+
+        return view('system.rovers.images', compact('images'));
+    }
+
+    /**
+     * Delete an image and the coordinates associated with it
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function deleteImage(Request $request)
+    {
+
+        $imageId = $request->image_id;
+
+        // build the query
+        $sql = "DELETE FROM IMAGES WHERE ID = $imageId";
+
+        // execute the query
+        DB::delete($sql);
+
+        // let the user know with a flash message
+        flash()->success("Image deleted successfully");
+
+        return redirect()->back();
     }
 }

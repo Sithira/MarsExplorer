@@ -4,6 +4,10 @@
 
     <h3 class="title">{!! $rover->name !!}</h3>
 
+    <br />
+    <a class="btn btn-danger" href="/rover/{!! $rover->id !!}/explore">Explore Mars using {!! $rover->name !!}</a>
+    <br />
+
     <!-- CAMERAS -->
     <div class="row">
 
@@ -86,6 +90,17 @@
                 </div>
             </div>
         @endforeach
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <h3 class="title">
+                <i class="ti-image"></i> Images Taken by the this rover
+            </h3>
+
+            <a class="btn btn-primary" href="{!! url()->current() !!}/images"><i class="ti-arrow-circle-right"></i> Images</a>
+        </div>
     </div>
 
 @endsection

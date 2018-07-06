@@ -23,6 +23,20 @@ Route::get('/rovers', 'RoverController@index')->name('rovers');
 
 Route::get('/rovers/{id}', 'RoverController@show')->name('rovers.show');
 
+Route::get('/rovers/{id}/images', 'RoverController@images');
+
+Route::get('/rover/{roverId}/explore', 'ExplorerMarsController@explore');
+
+Route::delete('/rovers/delete-image/', 'RoverController@deleteImage');
+
+Route::get('/rovers/{id}/objectives/create', 'ObjectiveController@create');
+
+Route::get('/rovers/{roverId}/objectives/{objectiveId}', 'ObjectiveController@edit');
+
+Route::post('/rovers/{id}/objectives', 'ObjectiveController@store');
+
+Route::post('/rovers/{id}/objectives/{objectiveId}', 'ObjectiveController@update');
+
 Route::get('/test', function() {
     (new \App\Http\Controllers\ExplorerMarsController())->explore(1);
 });

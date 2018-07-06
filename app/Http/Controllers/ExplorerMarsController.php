@@ -66,7 +66,7 @@ class ExplorerMarsController extends Controller
                 );
 
                 // let the user that the rover has successfully explored mars
-                flash()->success("Mars Successfully Explored by rover successfully");
+                flash()->success("Mars Successfully Explored !");
 
                 // redirect the user
                 return redirect()->back();
@@ -76,7 +76,7 @@ class ExplorerMarsController extends Controller
         }
         else
         {
-            flash()->error("Mars Successfully Explored by rover successfully");
+            flash()->error("Mars couldn't be explored right now");
 
             return redirect()->back();
         }

@@ -26,34 +26,9 @@
                     <p>Rovers</p>
                 </a>
             </li>
-
             <li>
-                <a href="missions.html">
-                    <i class="ti-view-list-alt"></i>
-                    <p>Missions</p>
-                </a>
-            </li>
-            <li>
-                <a href="rovers.html">
-                    <i class="ti-target"></i>
-                    <p>Rovers</p>
-                </a>
-            </li>
-            <li>
-                <a href="sensors.html">
-                    <i class="ti-signal"></i>
-                    <p>Sensors</p>
-                </a>
-            </li>
-            <li>
-                <a href="cameras.html">
-                    <i class="ti-camera"></i>
-                    <p>Cameras</p>
-                </a>
-            </li>
-            <li>
-                <a href="notifications.html">
-                    <i class="ti-package"></i>
+                <a href=/reports">
+                    <i class="ti-book"></i>
                     <p>Reports</p>
                 </a>
             </li>

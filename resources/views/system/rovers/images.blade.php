@@ -2,6 +2,8 @@
 
 @section('content')
 
+    @include('vendor.flash.ErrorFlash')
+
     <div class="row">
         @foreach($images as $image)
             <div class="col-md-4">

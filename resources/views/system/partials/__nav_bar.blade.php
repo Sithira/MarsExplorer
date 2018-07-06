@@ -27,7 +27,7 @@
                 </a>
             </li>
             <li>
-                <a href=/reports">
+                <a href="/reports">
                     <i class="ti-book"></i>
                     <p>Reports</p>
                 </a>

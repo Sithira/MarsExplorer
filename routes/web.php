@@ -37,6 +37,10 @@ Route::post('/rovers/{id}/objectives', 'ObjectiveController@store');
 
 Route::post('/rovers/{id}/objectives/{objectiveId}', 'ObjectiveController@update');
 
+Route::get('/reports', 'ReportController@index');
+
+Route::get('/reports/{roverId}', 'ReportController@getReportForRover');
+
 Route::get('/test', function() {
     (new \App\Http\Controllers\ExplorerMarsController())->explore(1);
 });

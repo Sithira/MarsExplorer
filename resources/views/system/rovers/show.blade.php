@@ -2,6 +2,8 @@
 
 @section('content')
 
+    @include('vendor.flash.ErrorFlash')
+
     <h3 class="title">{!! $rover->name !!}</h3>
 
     <br />

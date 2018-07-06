@@ -20,6 +20,7 @@ class ExplorerMarsController extends Controller
         // select the rover from the database
         $rover = DB::select("SELECT * FROM ROVER WHERE ID = $roverId");
 
+        // only if a rover is available
         if (!empty($rover))
         {
 
